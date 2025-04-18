@@ -1,4 +1,5 @@
 let isActive = false;
+let currentOverlay = null; // Track the current overlay
 
 const dvorakToColemak = {
   "'": "q", ",": "w", ".": "f", "p": "p", "y": "g",
@@ -15,14 +16,12 @@ function handleFocus(event) {
   if (isActive) {
     event.target.style.borderColor = 'green';
     event.target.style.backgroundColor = 'lightyellow';
-    event.target.style.color = 'darkgreen'; // Very dark green text
   }
 }
 function handleBlur(event) {
   if (isActive) {
     event.target.style.borderColor = '';
     event.target.style.backgroundColor = '';
-    event.target.style.color = ''; // Reset text color
   }
 }
 
@@ -33,16 +32,27 @@ function dvorakToColemakConversion(event) {
   const colemakKey = dvorakToColemak[event.key];
   if (colemakKey) {
     event.preventDefault();
-    const input = event.target;
+    let input = event.target;
+    let handled = false; // Flag to track if we've handled the conversion
 
-    if (input.isContentEditable || input.tagName === "TEXTAREA") {
-      input.setRangeText(colemakKey, input.selectionStart, input.selectionEnd, "end");
-    } else if (input.tagName === "INPUT") {
-      const start = input.selectionStart;
-      const newValue = input.value.slice(0, start) + colemakKey + input.value.slice(input.selectionEnd);
-      input.value = newValue;
-      input.setSelectionRange(start + 1, start + 1);
-    } else {
+    // Try to find the actual input element
+    while (input) {
+      if (input.isContentEditable) {
+        document.execCommand("insertText", false, colemakKey);
+        handled = true;
+        break;
+      } else if (input.tagName === "INPUT" || input.tagName === "TEXTAREA") {
+        const start = input.selectionStart;
+        const newValue = input.value.slice(0, start) + colemakKey + input.value.slice(input.selectionEnd);
+        input.value = newValue;
+        input.setSelectionRange(start + 1, start + 1);
+        handled = true;
+        break;
+      }
+      input = input.parentNode; // Move up the DOM tree
+    }
+
+    if (!handled) {
       document.execCommand("insertText", false, colemakKey);
     }
   }
@@ -50,6 +60,12 @@ function dvorakToColemakConversion(event) {
 
 // Show toggle message
 function showToggleMessage(message) {
+  // If there's an existing overlay, remove it
+  if (currentOverlay) {
+    clearTimeout(currentOverlay.fadeTimeout); // Clear any pending fadeout
+    document.body.removeChild(currentOverlay);
+  }
+
   const overlay = document.createElement('div');
   overlay.textContent = message;
   overlay.style.cssText = `
@@ -68,6 +84,7 @@ function showToggleMessage(message) {
     z-index: 10000;
   `;
   document.body.appendChild(overlay);
+  currentOverlay = overlay; // Store the current overlay
 
   // Fade in
   setTimeout(() => {
@@ -75,10 +92,13 @@ function showToggleMessage(message) {
   }, 10);
 
   // Fade out
-  setTimeout(() => {
+  overlay.fadeTimeout = setTimeout(() => { // Store the timeout ID
     overlay.style.opacity = 0;
     setTimeout(() => {
-      document.body.removeChild(overlay);
+      if (currentOverlay === overlay) { // Only remove if it's still the current one
+        document.body.removeChild(overlay);
+        currentOverlay = null;
+      }
     }, 500); // Wait for fade out
   }, 2500); // Total display time
 }
@@ -93,24 +113,21 @@ function toggleFeature(event) {
     showToggleMessage(isActive ? "COLEMAK ON" : "COLEMAK OFF");
 
     // Update input styles based on isActive
-    document.querySelectorAll('input, textarea, [contenteditable="true"]').forEach(input => {
+    document.querySelectorAll('input, textarea').forEach(input => {
       if (isActive) {
         input.addEventListener('focus', handleFocus);
         input.addEventListener('blur', handleBlur);
         input.style.borderColor = '';
         input.style.backgroundColor = '';
-        input.style.color = ''; // Reset text color
         if (input === document.activeElement) {
           input.style.borderColor = 'green';
           input.style.backgroundColor = 'lightyellow';
-          input.style.color = 'darkgreen'; // Very dark green text
         }
       } else {
         input.removeEventListener('focus', handleFocus);
         input.removeEventListener('blur', handleBlur);
         input.style.borderColor = '';
         input.style.backgroundColor = '';
-        input.style.color = ''; // Reset text color
       }
     });
   }
@@ -127,7 +144,7 @@ document.addEventListener('keydown', toggleFeature);
 document.addEventListener('keydown', dvorakToColemakConversion);
 
 // Apply initial event listeners
-document.querySelectorAll('input, textarea, [contenteditable="true"]').forEach(input => {
+document.querySelectorAll('input, textarea').forEach(input => {
   input.addEventListener('focus', handleFocus);
   input.addEventListener('blur', handleBlur);
 });
