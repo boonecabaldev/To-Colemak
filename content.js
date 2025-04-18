@@ -14,14 +14,14 @@ const dvorakToColemak = {
 // Handle focus & blur
 function handleFocus(event) {
   if (isActive) {
-    event.target.style.borderColor = 'green';
-    event.target.style.backgroundColor = 'lightyellow';
+    event.target.style.borderColor = 'red';
+    //event.target.style.backgroundColor = 'lightyellow';
   }
 }
 function handleBlur(event) {
   if (isActive) {
     event.target.style.borderColor = '';
-    event.target.style.backgroundColor = '';
+    //event.target.style.backgroundColor = '';
   }
 }
 
@@ -120,14 +120,14 @@ function toggleFeature(event) {
         input.style.borderColor = '';
         input.style.backgroundColor = '';
         if (input === document.activeElement) {
-          input.style.borderColor = 'green';
-          input.style.backgroundColor = 'lightyellow';
+          input.style.borderColor = 'red';
+          //input.style.backgroundColor = 'lightyellow';
         }
       } else {
         input.removeEventListener('focus', handleFocus);
         input.removeEventListener('blur', handleBlur);
         input.style.borderColor = '';
-        input.style.backgroundColor = '';
+        //input.style.backgroundColor = '';
       }
     });
   }
