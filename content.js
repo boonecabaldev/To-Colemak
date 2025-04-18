@@ -1,4 +1,4 @@
-let isActive = true;
+let isActive = false;
 
 const dvorakToColemak = {
   "'": "q", ",": "w", ".": "f", "p": "p", "y": "g",
@@ -15,12 +15,14 @@ function handleFocus(event) {
   if (isActive) {
     event.target.style.borderColor = 'green';
     event.target.style.backgroundColor = 'lightyellow';
+    event.target.style.color = 'darkgreen'; // Very dark green text
   }
 }
 function handleBlur(event) {
   if (isActive) {
     event.target.style.borderColor = '';
     event.target.style.backgroundColor = '';
+    event.target.style.color = ''; // Reset text color
   }
 }
 
@@ -91,21 +93,24 @@ function toggleFeature(event) {
     showToggleMessage(isActive ? "COLEMAK ON" : "COLEMAK OFF");
 
     // Update input styles based on isActive
-    document.querySelectorAll('input, textarea').forEach(input => {
+    document.querySelectorAll('input, textarea, [contenteditable="true"]').forEach(input => {
       if (isActive) {
         input.addEventListener('focus', handleFocus);
         input.addEventListener('blur', handleBlur);
         input.style.borderColor = '';
         input.style.backgroundColor = '';
+        input.style.color = ''; // Reset text color
         if (input === document.activeElement) {
           input.style.borderColor = 'green';
           input.style.backgroundColor = 'lightyellow';
+          input.style.color = 'darkgreen'; // Very dark green text
         }
       } else {
         input.removeEventListener('focus', handleFocus);
         input.removeEventListener('blur', handleBlur);
         input.style.borderColor = '';
         input.style.backgroundColor = '';
+        input.style.color = ''; // Reset text color
       }
     });
   }
@@ -122,7 +127,7 @@ document.addEventListener('keydown', toggleFeature);
 document.addEventListener('keydown', dvorakToColemakConversion);
 
 // Apply initial event listeners
-document.querySelectorAll('input, textarea').forEach(input => {
+document.querySelectorAll('input, textarea, [contenteditable="true"]').forEach(input => {
   input.addEventListener('focus', handleFocus);
   input.addEventListener('blur', handleBlur);
 });
