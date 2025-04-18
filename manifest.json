@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "Dvorak to Colemak Converter",
+    "version": "1.0",
+    "description": "Converts Dvorak to Colemak keyboard layout on webpages.",
+    "permissions": ["activeTab", "storage", "scripting"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "icon16-copy-16.png"
+      }
+    },
+    "icons": {
+      "16": "icon16-copy-16.png"
+    }
+  }
+  
