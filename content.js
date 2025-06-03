@@ -143,20 +143,25 @@ function toggleFeature(event) {
         //input.style.backgroundColor = '';
       }
     });
+
+    chrome.storage.sync.set({ isActive });
+
+    // Notify popup (if open) about the new state
+    chrome.runtime.sendMessage({ action: "updateCheckbox", isActive });
   }
 }
 
 // Listen for layout change messages
 chrome.runtime.onMessage.addListener((message) => {
-  if (message.action === "setLayout") {
-    if (message.layout === "dvorak") {
-      keyboardLayout = dvorakToColemak;
-    } else {
-      keyboardLayout = qwertyToColemak;
-    }
+  if (message.action === "toggleFeature") {
+    // Simulate Ctrl+L toggle
+    isActive = !isActive;
+    chrome.storage.sync.set({ isActive });
+    showToggleMessage(isActive ? "COLEMAK ON" : "COLEMAK OFF");
+    // (Optional: update input styles here)
   }
-  if (message.action === "showDialog") {
-    alert("Dialog Placeholder: You can add UI here.");
+  if (message.action === "setLayout") {
+    keyboardLayout = message.layout === "dvorak" ? dvorakToColemak : qwertyToColemak;
   }
 });
 
@@ -167,6 +172,15 @@ chrome.storage.sync.get('layout', function(data) {
   } else {
     keyboardLayout = qwertyToColemak;
   }
+});
+
+// On load, restore highlighting if active
+chrome.storage.sync.get('isActive', function(data) {
+    isActive = !!data.isActive;
+    if (isActive && document.activeElement && (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA" || document.activeElement.isContentEditable)) {
+        document.activeElement.style.borderColor = 'red';
+        // Optionally: document.activeElement.style.backgroundColor = 'lightyellow';
+    }
 });
 
 document.addEventListener('keydown', toggleFeature);
