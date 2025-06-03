@@ -11,6 +11,19 @@ const dvorakToColemak = {
   "[": "-", "]": "=", "w": ",", "v": ".", "z": "/"
 };
 
+// QWERTY to Colemak key mapping
+const qwertyToColemak = {
+  "q": "q", "w": "w", "e": "f", "r": "p", "t": "g",
+  "y": "j", "u": "l", "i": "u", "o": "y", "p": ";",
+  "[": "[", "]": "]", "a": "a", "s": "r", "d": "s",
+  "f": "t", "g": "d", "h": "h", "j": "n", "k": "e",
+  "l": "i", ";": "o", "'": "'", "z": "z", "x": "x",
+  "c": "c", "v": "v", "b": "b", "n": "k", "m": "m",
+  ",": ",", ".": ".", "/": "/"
+};
+
+let keyboardLayout = qwertyToColemak; // Default to Dvorak to Colemak mapping
+
 // Handle focus & blur
 function handleFocus(event) {
   if (isActive) {
@@ -29,7 +42,7 @@ function handleBlur(event) {
 function dvorakToColemakConversion(event) {
   if (!isActive || event.ctrlKey || event.altKey || event.metaKey) return;
 
-  const colemakKey = dvorakToColemak[event.key];
+  const colemakKey = keyboardLayout[event.key];
   if (colemakKey) {
     event.preventDefault();
     let input = event.target;
