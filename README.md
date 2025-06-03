@@ -21,20 +21,15 @@ A Chrome extension that helps you convert your keyboard input from QWERTY or Dvo
 ## Development
 
 - **Popup UI:** `popup.html`, `popup.js`
-- **Content Script:** `content.js`
-- **Key Mappings:** Defined in `content.js`
+- **Content Scripts:** `model.js`, `view.js`, `content.js`
+- **Key Mappings:** Defined in `model.js`
 - **Settings Storage:** Uses `chrome.storage.sync`
 
-## Keyboard Mappings
+## Testing
 
-- QWERTY → Colemak
-- Dvorak → Colemak
+- **Unit tests:** Located in the `tests/` folder
+- **Run tests:**  
 
-See `content.js` for the full mapping tables.
-
-## Permissions
-
-- `activeTab`
-- `storage`
-
-**Made for keyboard enthusiasts and Colemak learners!**
+  ```sh
+  npm test
+  ```
