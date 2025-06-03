@@ -146,10 +146,26 @@ function toggleFeature(event) {
   }
 }
 
-// Listen for messages from `background.js`
+// Listen for layout change messages
 chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === "setLayout") {
+    if (message.layout === "dvorak") {
+      keyboardLayout = dvorakToColemak;
+    } else {
+      keyboardLayout = qwertyToColemak;
+    }
+  }
   if (message.action === "showDialog") {
     alert("Dialog Placeholder: You can add UI here.");
+  }
+});
+
+// On load, get the saved layout
+chrome.storage.sync.get('layout', function(data) {
+  if (data.layout === "dvorak") {
+    keyboardLayout = dvorakToColemak;
+  } else {
+    keyboardLayout = qwertyToColemak;
   }
 });
 
