@@ -8,7 +8,7 @@ const { Model } = require('../model.js');
 const { dvorakToColemakConversion } = require('../controller.js');
 
 global.Model = Model;
-document.execCommand = jest.fn();
+//document.execCommand = jest.fn();
 
 describe('View', () => {
   beforeEach(() => {
