@@ -1,4 +1,4 @@
-const { Model } = require('../model.js');
+const { Model } = require('../src/model.js');
 
 describe('Model', () => {
   beforeEach(() => {

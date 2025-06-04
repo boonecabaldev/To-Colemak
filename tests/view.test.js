@@ -3,9 +3,9 @@
  */
 jest.useFakeTimers();
 
-const { View } = require('../view.js');
-const { Model } = require('../model.js');
-const { dvorakToColemakConversion } = require('../controller.js');
+const { View } = require('../src/view.js');
+const { Model } = require('../src/model.js');
+const { dvorakToColemakConversion } = require('../src/controller.js');
 
 global.Model = Model;
 //document.execCommand = jest.fn();
