@@ -22,5 +22,5 @@ document.querySelectorAll("input, textarea").forEach((input) => {
 
 // For Node/testing
 if (typeof require !== "undefined") {
-  var { dvorakToColemakConversion, toggleFeature } = require('./controller.js');
+  var { dvorakToColemakConversion, toggleFeature } = require("./controller.js");
 }

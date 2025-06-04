@@ -3,12 +3,12 @@ const View = {
   currentOverlay: null,
   handleFocus(event) {
     if (Model.isActive) {
-      event.target.style.borderColor = 'red';
+      event.target.style.borderColor = "red";
     }
   },
   handleBlur(event) {
     if (Model.isActive) {
-      event.target.style.borderColor = '';
+      event.target.style.borderColor = "";
     }
   },
   updateHighlight() {
@@ -19,7 +19,7 @@ const View = {
         document.activeElement.tagName === "TEXTAREA" ||
         document.activeElement.isContentEditable)
     ) {
-      document.activeElement.style.borderColor = 'red';
+      document.activeElement.style.borderColor = "red";
     }
   },
   showToggleMessage(message) {
@@ -27,7 +27,7 @@ const View = {
       clearTimeout(this.currentOverlay.fadeTimeout);
       document.body.removeChild(this.currentOverlay);
     }
-    const overlay = document.createElement('div');
+    const overlay = document.createElement("div");
     overlay.textContent = message;
     overlay.style.cssText = `
       position: fixed;
@@ -58,7 +58,7 @@ const View = {
         }
       }, 500);
     }, 2500);
-  }
+  },
 };
 
 if (typeof module !== "undefined" && module.exports) {

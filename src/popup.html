@@ -1,62 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dvorak to Colemak</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #23272f;
-            color: #f3f3f3;
-            margin: 0;
-            padding: 20px 24px 18px 24px;
-            min-width: 220px;
-        }
-        h1 {
-            margin-top: 0;
-            margin-bottom: 18px;
-            font-size: 1.3em;
-            letter-spacing: 1px;
-            color: #7ecfff;
-            text-align: center;
-        }
-        label {
-            font-size: 1em;
-            margin-bottom: 8px;
-            display: block;
-            color: #b3e1ff;
-        }
-        select {
-            width: 100%;
-            padding: 7px 10px;
-            border-radius: 5px;
-            border: 1px solid #444;
-            background: #2e3440;
-            color: #f3f3f3;
-            font-size: 1em;
-            margin-bottom: 10px;
-            outline: none;
-            transition: border 0.2s;
-        }
-        select:focus {
-            border: 1.5px solid #7ecfff;
-        }
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #23272f;
+        color: #f3f3f3;
+        margin: 0;
+        padding: 20px 24px 18px 24px;
+        min-width: 220px;
+      }
+      h1 {
+        margin-top: 0;
+        margin-bottom: 18px;
+        font-size: 1.3em;
+        letter-spacing: 1px;
+        color: #7ecfff;
+        text-align: center;
+      }
+      label {
+        font-size: 1em;
+        margin-bottom: 8px;
+        display: block;
+        color: #b3e1ff;
+      }
+      select {
+        width: 100%;
+        padding: 7px 10px;
+        border-radius: 5px;
+        border: 1px solid #444;
+        background: #2e3440;
+        color: #f3f3f3;
+        font-size: 1em;
+        margin-bottom: 10px;
+        outline: none;
+        transition: border 0.2s;
+      }
+      select:focus {
+        border: 1.5px solid #7ecfff;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Colemak Layout Converter</h1>
     <label for="layoutSelect">Convert from:</label>
     <select id="layoutSelect">
       <option value="qwerty">QWERTY</option>
       <option value="dvorak">Dvorak</option>
     </select>
-    <div style="margin: 18px 0 0 0; text-align: center;">
-        <label for="toggleActive" style="display: inline; color: #b3e1ff; font-size: 1em;">
-            <input type="checkbox" id="toggleActive" style="accent-color: #7ecfff; margin-right: 7px;">
-            Enable Key Conversion
-        </label>
+    <div style="margin: 18px 0 0 0; text-align: center">
+      <label
+        for="toggleActive"
+        style="display: inline; color: #b3e1ff; font-size: 1em"
+      >
+        <input
+          type="checkbox"
+          id="toggleActive"
+          style="accent-color: #7ecfff; margin-right: 7px"
+        />
+        Enable Key Conversion
+      </label>
     </div>
     <script src="popup.js"></script>
-</body>
+  </body>
 </html>
