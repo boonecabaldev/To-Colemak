@@ -10,6 +10,9 @@ coverage/
 # OS-specific files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
 
 # Logs
 npm-debug.log*
@@ -19,3 +22,28 @@ yarn-error.log*
 # Build artifacts (if you use a bundler)
 dist/
 build/
+
+# Environment files
+.env
+.env.*
+
+# Python/Conda (if used)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.conda
+*.env
+*.venv
+env/
+venv/
+ENV/
+.conda/
+.venv/
+
+# Mac system files
+.Spotlight-V100
+.Trashes
+
+# Windows system files
+$RECYCLE.BIN/
