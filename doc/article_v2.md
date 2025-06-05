@@ -4,11 +4,11 @@
 
 Ever found yourself on a computer where you can't change the system-wide keyboard layout? Perhaps it's a shared machine, or IT policies restrict access to system settings. If you're a Colemak user, this can be frustrating. In this article, I'll guide you through "To-Colemak," a browser extension I'm developing that allows you to seamlessly switch your typing from QWERTY or Dvorak to Colemak directly within your browser.
 
-You can find the project repository [here](https://github.com/boonecabaldev/To-Colemak/tree/dev).
+The repository is available [here](https://github.com/boonecabaldev/To-Colemak/tree/dev).
 
 ## Prerequisites
 
-This article assumes you have a foundational understanding of HTML, CSS, and JavaScript, along with a general idea of how browser extensions work. If you're new to these concepts, here are some excellent resources to get you started:
+This article assumes a basic understanding of HTML, CSS, and JavaScript, along with a general idea of how browser extensions work. If you're new to these concepts, here are some excellent resources to get you started:
 
 - [HTML & CSS: Your Gateway to Building Stunning Websites](https://dev.to/techcrafted/html-css-your-gateway-to-building-stunning-websites-2hff)
 - [Browser Extension - Extension architecture](https://dev.to/qmenoret/browser-extension-extension-architecture-13m1)
@@ -34,7 +34,7 @@ Here's a typical use case:
 
 Now, notice the red border around the active input field; when you type, you'll be using the Colemak layout!
 
-> **NOTE**: This extension is a work in progress, and earlier versions might not work perfectly on all types of text elements.
+> **NOTE**: This extension is a work in progress, and earlier versions might not work perfectly on elements like contenteditable divs, fields inside iframes, or inputs rendered with shadow DOM, which are trickier to access reliably.
 
 ## Project Structure
 
