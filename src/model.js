@@ -1,6 +1,9 @@
 const Model = {
+  // public properties
   isActive: false,
   keyboardLayout: null,
+
+  // private properties
   dvorakToColemak: {
     "'": "q",
     ",": "w",

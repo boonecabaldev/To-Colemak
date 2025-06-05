@@ -1,3 +1,7 @@
+// Controller for the Colemak keyboard layout extension
+// This file handles the conversion of key presses to the Colemak layout
+
+
 function convertToColemak(event) {
   if (!Model.isActive || event.ctrlKey || event.altKey || event.metaKey) return;
   const colemakKey = Model.keyboardLayout[event.key];

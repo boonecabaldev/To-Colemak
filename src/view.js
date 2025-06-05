@@ -1,4 +1,4 @@
-// --- View ---
+
 const View = {
   currentOverlay: null,
   handleFocus(event) {

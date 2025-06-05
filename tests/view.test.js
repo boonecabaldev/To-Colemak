@@ -48,7 +48,7 @@ describe("View", () => {
     jest.runAllTimers();
   });
 
-  test("handleFocus does not set borderColor if Model.isActive is false", () => {
+  test("handleFocus does not set borderColor if Model is inactive", () => {
     Model.isActive = false;
     const input = document.createElement("input");
     View.handleFocus({ target: input });
