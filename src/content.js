@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener((message) => {
 Model.load();
 
 document.addEventListener("keydown", toggleFeature);
-document.addEventListener("keydown", dvorakToColemakConversion);
+document.addEventListener("keydown", convertToColemak);
 
 document.querySelectorAll("input, textarea").forEach((input) => {
   input.addEventListener("focus", View.handleFocus);
@@ -22,5 +22,5 @@ document.querySelectorAll("input, textarea").forEach((input) => {
 
 // For Node/testing
 if (typeof require !== "undefined") {
-  var { dvorakToColemakConversion, toggleFeature } = require("./controller.js");
+  var { convertToColemak, toggleFeature } = require("./controller.js");
 }

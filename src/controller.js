@@ -1,4 +1,4 @@
-function dvorakToColemakConversion(event) {
+function convertToColemak(event) {
   if (!Model.isActive || event.ctrlKey || event.altKey || event.metaKey) return;
   const colemakKey = Model.keyboardLayout[event.key];
   if (colemakKey) {
@@ -56,5 +56,5 @@ function toggleFeature(event) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { dvorakToColemakConversion, toggleFeature };
+  module.exports = { convertToColemak, toggleFeature };
 }

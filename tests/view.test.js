@@ -5,7 +5,7 @@ jest.useFakeTimers();
 
 const { View } = require("../src/view.js");
 const { Model } = require("../src/model.js");
-const { dvorakToColemakConversion } = require("../src/controller.js");
+const { convertToColemak } = require("../src/controller.js");
 
 global.Model = Model;
 //document.execCommand = jest.fn();
@@ -83,7 +83,7 @@ describe("View", () => {
       input.selectionEnd = input.value.length;
       const event = new KeyboardEvent("keydown", { key, bubbles: true });
       Object.defineProperty(event, "target", { writable: false, value: input });
-      dvorakToColemakConversion(event);
+      convertToColemak(event);
     });
 
     // The expected value is: 'hi ' + mapped keys
